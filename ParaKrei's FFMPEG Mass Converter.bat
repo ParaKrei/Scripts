@@ -285,8 +285,10 @@ if NOT %informat% EQU all goto conversion_norm
 cd %indir%
 for %%a in ("*.%informat%") do "%ffmpegdir%\ffmpeg.exe" -i "%%a" "%outdir%\%%~na.%outformat%"
 pause
+exit
 
 :conversion_alltypes
 cd %indir%
 for %%a in ("*.*") do "%ffmpegdir%\ffmpeg.exe" -i "%%a" "%outdir%\%%~na.%outformat%"
 pause
+exit
