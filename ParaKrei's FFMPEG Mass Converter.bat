@@ -17,6 +17,7 @@ set /p "input=Where is your copy of ffmpeg.exe located? "
 set ffmpegdir=%input%
 set /p "input=Please enter the directory you wish to bulk convert. "
 set indir=%input%
+set indirdrive=%indir:~0,1%
 set /p "input=Where do you want to place the converted files in? "
 set outdir=%input%
 echo Alright, now onto other options.
@@ -109,11 +110,11 @@ if %option% EQU 2 goto :transition2
 :currentsettings
 echo Oh, so you want to review your settings? Alright then!
 echo Your current settings are:
-echo FFMPEG Directory: %ffmpegdir%
-echo Input Directory: %indir%
+echo FFMPEG Directory: '%ffmpegdir%'
+echo Input Directory: '%indir%', Drive %indirdrive%
 echo Input Format: %informat%
 echo Output Format: %outformat%
-echo Output Directory: %outdir%
+echo Output Directory: '%outdir%'
 choice /c YN /n /m "Would you like to change any of these settings? Y or N? "
 set change=%ERRORLEVEL%
 if %change% EQU 1 goto changesettings
@@ -147,7 +148,8 @@ goto currentsettings
 :indir_change
 set /p "input=Please enter in the new directory you would like to convert. "
 set indir=%input%
-echo You set it to %indir%
+set indirdrive=%indir:~0,1%
+echo You set it to '%indir%', which is on the %indirdrive% drive.
 echo Sending you back to the current settings screen...
 timeout 1
 cls
@@ -174,7 +176,7 @@ goto currentsettings
 :outdir_change
 set /p "input=Please enter in the new directory you would like to export to. "
 set outdir=%input%
-echo You set it to %outdir%
+echo You set it to '%outdir%'.
 echo Sending you back to the current settings screen...
 timeout 1
 cls
@@ -283,12 +285,14 @@ if NOT %informat% EQU all goto conversion_norm
 
 :conversion_norm
 cd %indir%
+%indirdrive%:
 for %%a in ("*.%informat%") do "%ffmpegdir%\ffmpeg.exe" -i "%%a" "%outdir%\%%~na.%outformat%"
 pause
 exit
 
 :conversion_alltypes
 cd %indir%
+%indirdrive%:
 for %%a in ("*.*") do "%ffmpegdir%\ffmpeg.exe" -i "%%a" "%outdir%\%%~na.%outformat%"
 pause
 exit
