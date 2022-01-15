@@ -1,2 +1,2 @@
-# BatchFiles
-This repository contains ALL of the batch files I have programmed.
+# Scripts
+This repository contains ALL of the scripts I have programmed.
