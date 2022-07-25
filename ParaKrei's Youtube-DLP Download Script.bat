@@ -1,16 +1,16 @@
 @echo off
-title ParaKrei's Youtube-DL Download Script
+title ParaKrei's Youtube-DLP Download Script
 SetLocal EnableDelayedExpansion
 
 :intro
 echo ------------------------------------------------------------------------
-echo    Welcome to ParaKrei's Youtube-DL Download Script^^! (May 16, 2021)
+echo    Welcome to ParaKrei's Youtube-DLP Download Script^^! (May 16, 2021)
 echo ------------------------------------------------------------------------
 echo YOU WILL NEED ffmpeg FOR THIS TO WORK PROPERLY^^!
 echo.
 echo.
-echo DISCLAIMER: This script is fan-made, and therefore NOT endorsed by the original creators of Youtube-DL.
-echo Beware of the potential issues this script may have when using a different version of Youtube-DL.
+echo DISCLAIMER: This script is fan-made, and therefore NOT endorsed by the original creators of Youtube-DLP.
+echo Beware of the potential issues this script may have when using a different version of Youtube-DLP.
 echo.
 echo.
 set /p "input=Please enter the URL of the video or audio you wish to convert. "
@@ -29,7 +29,7 @@ if %converttype% EQU 3 goto subtitle_format
 
 :audio_format
 echo What format do you want the audio to be? (EX: best (default), mp3, wav, etc.)
-echo (If you don't know the formats that Youtube-DL can use, type help, and this is case sensitive.)
+echo (If you don't know the formats that Youtube-DLP can use, type help, and this is case sensitive.)
 set /p "input=Audio format please^! "
 set audio_format=%input%
 set video_format=n/a
@@ -59,7 +59,7 @@ goto :audio_quality
 
 :video_format
 echo What format do you want the video to be? (EX: mp4, mkv, avi, etc.)
-echo (If you don't know the formats that Youtube-DL can use, type help, and this is case sensitive.)
+echo (If you don't know the formats that Youtube-DLP can use, type help, and this is case sensitive.)
 set /p "input=Video format please^! "
 set video_format=%input%
 set audio_format=n/a
@@ -93,7 +93,7 @@ if %converttype% EQU 2 goto :audio_format
 if %converttype% EQU 3 goto :subtitle_format
 
 :video_help
-echo Oh, so you need to know the video formats that Youtube-DL knows?
+echo Oh, so you need to know the video formats that Youtube-DLP knows?
 echo Well, then you came to the right place^^!
 echo The supported formats are:
 echo keep - This option keeps the original formats of the extracted video.
@@ -138,10 +138,10 @@ cls
 goto :transition
 
 :audio_help
-echo Oh, so you need to know the audio formats that Youtube-DL knows?
+echo Oh, so you need to know the audio formats that Youtube-DLP knows?
 echo Well, then you came to the right place^^!
 echo The supported formats are:
-echo best - The default setting within Youtube-DL.
+echo best - The default setting within Youtube-DLP.
 echo acc - A high-quality audio format that is generally used by Apple's iTunes.
 echo flac - Another high-quality audio format that is basically public domain to all people.
 echo mp3 - The most common audio format that is seen around the world, which is optimized to use a less amount of space as possible.
@@ -157,8 +157,8 @@ goto :audio_format
 :subtitle_format
 cls
 echo What format do you want the subtitles to be? (EX: srt, ass, etc.)
-echo (If you don't know the formats that Youtube-DL can use, type help, and this is case sensitive.)
-echo (Remember, you can "convert" subtitles, AND "list" the ones within your video.)
+echo (If you don't know the formats that Youtube-DLP can use, type help, and this is case sensitive.)
+echo (Remember, you can "convert" subtitles!)
 set /p "input=Subtitle format please^! "
 set subtitle_format=%input%
 set audio_format=n/a
@@ -166,7 +166,6 @@ if %converttype% EQU 3 set video_format=n/a
 
 if %subtitle_format% EQU help goto :subtitleformat_help
 if %subtitle_format% EQU convert goto :subtitle_convert
-if %subtitle_format% EQU list goto :subtitle_list
 choice /c YN /n /m "Now, are you SURE this is the format you want? Y or N?"
 set option=%ERRORLEVEL%
 if %option% EQU 1 goto :subtitle_lang
@@ -181,7 +180,7 @@ cls
 
 :subtitle_convert
 echo What format do you want to convert the subtitles to? (EX: srt, ass, etc.)
-echo (If you don't know the formats that Youtube-DL can use, type help, and this is case sensitive.)
+echo (If you don't know the formats that Youtube-DLP can use, type help, and this is case sensitive.)
 set /p "input="
 set subtitle_convertformat=%input%
 
@@ -198,7 +197,7 @@ if NOT %subtitle_convertformat% EQU vtt goto :format_unrecognized
 if NOT %subtitle_convertformat% EQU lrc goto :format_unrecognized
 
 :subtitle_convert_help
-echo Ah, you would like to know the formats Youtube-DL can convert to...
+echo Ah, you would like to know the formats Youtube-DLP can convert to...
 echo You ask, and I deliver^^!
 echo The supported formats are:
 echo srt - The more commonly used format, the SubRip Subtitles. These are more basic, and can usually be made manually without special editors.
@@ -210,26 +209,12 @@ pause
 cls
 goto :subtitle_convert
 
-:subtitle_list
-echo Alright, I'll get Youtube-DL ready...
-timeout 2
-cls
-youtube-dl --list-subs %url%
-pause
-echo.
-echo I'll give you a bit to read this.
-echo Press any key after you are done reading to return to the subtitle format prompt.
-pause
-goto :subtitle_format
-cls
-
 :subtitleformat_help
 echo Ah, you have asked me for help on subtitle formats.
 echo There is just one issue... The subtitles availible depend on the video.
 echo There are a varity of subtitle formats, making it difficult to pinpoint the exact subtitles possible.
-echo There is a way to convert subtitles within Youtube-DL, you just need to call for it in the subtitle format prompt, as 'convert'.
-echo If you don't want to go through the hassle, type in 'best' as it is the default, and Youtube-DL choses the best format usable.
-echo We can also check the subtitle formats, you can enter that function under the name of 'list' in the prompt.
+echo There is a way to convert subtitles within Youtube-DLP, you just need to call for it in the subtitle format prompt, as 'convert'.
+echo If you don't want to go through the hassle, type in 'best' as it is the default, and Youtube-DLP choses the best format usable.
 echo When you are done reading, just press any key to go back to the format screen^^!
 pause
 cls
@@ -238,7 +223,7 @@ goto :subtitle_format
 :subtitle_lang
 echo You're getting close to finishing^^! Just hang in there a little longer^^!
 echo What language do you want the subtitles to be? (EX: en, ko, auto, etc.)
-echo (If you don't know the languages that Youtube-DL can detect, type help, and this is case sensitive.)
+echo (If you don't know the languages that Youtube-DLP can detect, type list to list the ones available, and this is case sensitive.)
 set /p "input=Subtitle language please^! "
 set subtitle_lang=%input%
 choice /c YN /n /m "Now, are you SURE this is the language you want? Y or N?"
@@ -247,18 +232,19 @@ if %option% EQU 1 goto :audio_quality
 if %option% EQU 2 goto :lang_correction
 cls
 
-if %subtitle_lang% EQU help goto :subtitlelang_help
+if %subtitle_lang% EQU list goto :subtitle_langlist
 
-:subtitlelang_help
-echo Ah, you are seeking help on subtitle languages.
-echo I am unable to list everything, as not every video or audio has all the languages, so I can only give guidence on certain answers, and HOW to find the subs yourself.
-echo If you want to find the language, usually it is the first TWO letters of the name. For example, English is 'en', Korean is 'ko', japanese is 'ja', English (United States) is en-US, etc.
-echo There are also two other options. The first is the auto-generated subtitles, which is 'auto'. The second is ALL of them, with the simple option of 'all'.
-echo If you want to discover the languages that the video you chose has, open up your console (which on Windows is CMD/Command Prompt), and enter in 'youtube-dl --list-subs' and type in your video/audio's URL.
-echo When you are done reading, just press any key to go back to the format screen^^!
-pause
+:subtitle_langlist
+echo Alright, I'll get Youtube-DLP ready...
+timeout 2
 cls
+yt-dlp --list-subs %url%
+echo.
+echo I'll give you a bit to read this.
+echo Press any key after you are done reading to return to the subtitle format prompt.
+pause
 goto :subtitle_format
+cls
 
 :lang_correction
 echo Ah, it seems you have incorrectly typed in your desired subtitle language. Let me reset the prompt for you...
@@ -398,85 +384,85 @@ goto :transition
 echo Alright^^! Let's get started^^! (Press a key when you are ready.)
 pause
 cls
-echo Preparing Youtube-DL.
+echo Preparing Youtube-DLP.
 timeout 0.9
 cls
-echo Preparing Youtube-DL..
+echo Preparing Youtube-DLP..
 timeout 0.9
 cls
-echo Preparing Youtube-DL...
+echo Preparing Youtube-DLP...
 timeout 0.9
 cls
-echo Preparing Youtube-DL.
+echo Preparing Youtube-DLP.
 timeout 0.9
 cls
-echo Preparing Youtube-DL..
+echo Preparing Youtube-DLP..
 timeout 0.9
 cls
-echo Preparing Youtube-DL...
+echo Preparing Youtube-DLP...
 timeout 0.9
 cls
-echo Preparing Youtube-DL.
+echo Preparing Youtube-DLP.
 timeout 0.9
 cls
-echo Preparing Youtube-DL..
+echo Preparing Youtube-DLP..
 timeout 0.9
 cls
-echo Preparing Youtube-DL...
+echo Preparing Youtube-DLP...
 timeout 0.9
 cls
-echo Preparing Youtube-DL.
+echo Preparing Youtube-DLP.
 timeout 0.9
 cls
-echo Preparing Youtube-DL..
+echo Preparing Youtube-DLP..
 timeout 0.9
 cls
-echo Preparing Youtube-DL...
+echo Preparing Youtube-DLP...
 timeout 0.9
 cls
-echo Preparing Youtube-DL.
+echo Preparing Youtube-DLP.
 timeout 0.9
 cls
-echo Preparing Youtube-DL..
+echo Preparing Youtube-DLP..
 timeout 0.9
 cls
-echo Preparing Youtube-DL...
+echo Preparing Youtube-DLP...
 timeout 0.9
 cls
-echo Preparing Youtube-DL.
+echo Preparing Youtube-DLP.
 timeout 0.9
 cls
-echo Preparing Youtube-DL..
+echo Preparing Youtube-DLP..
 timeout 0.9
 cls
-echo Preparing Youtube-DL...
+echo Preparing Youtube-DLP...
 timeout 0.9
 cls
-echo Preparing Youtube-DL.
+echo Preparing Youtube-DLP.
 timeout 0.9
 cls
-echo Preparing Youtube-DL..
+echo Preparing Youtube-DLP..
 timeout 0.9
 cls
-echo Preparing Youtube-DL...
+echo Preparing Youtube-DLP...
 timeout 0.9
 cls
-echo Preparing Youtube-DL.
+echo Preparing Youtube-DLP.
 timeout 0.9
 cls
-echo Preparing Youtube-DL..
+echo Preparing Youtube-DLP..
 timeout 0.9
 cls
-echo Preparing Youtube-DL...
+echo Preparing Youtube-DLP...
 timeout 0.9
 cls
-echo Preparing Youtube-DL.
+echo Preparing Youtube-DLP.
 timeout 0.9
 cls
-echo Preparing Youtube-DL..
+echo Preparing Youtube-DLP..
 timeout 0.9
 cls
-echo Preparing Youtube-DL...
+echo Preparing Youtube-DLP...
 timeout 0.9
 cls
 goto :variable_clean
@@ -550,97 +536,97 @@ if %subtitle_lang% EQU auto (
 		)
 
 :video_extract
-youtube-dl --recode-video %video_format% --audio-quality %quality% %url%
+yt-dlp --recode-video %video_format% --audio-quality %quality% %url%
 pause
 goto :end_video
 
 :audio_extract
-youtube-dl --extract-audio --audio-format %audio_format% --audio-quality %quality% %url%
+yt-dlp --extract-audio --audio-format %audio_format% --audio-quality %quality% %url%
 pause
 goto :end_audio
 
 :video_extract_keep
-youtube-dl --keep-video --audio-quality %quality% %url%
+yt-dlp --keep-video --audio-quality %quality% %url%
 pause
 goto :end_video
 
 :subtitle_extract
-youtube-dl --write-sub --sub-lang %subtitle_lang% --sub-format %subtitle_format% --skip-download %url%
+yt-dlp --write-sub --sub-lang %subtitle_lang% --sub-format %subtitle_format% --skip-download %url%
 pause
 goto :end_subtitles
 
 :subtitle_extractauto
-youtube-dl --write-auto-sub --skip-download %url%
+yt-dlp --write-auto-sub --skip-download %url%
 pause
 goto :end_subtitles
 
 :subtitle_extract-convert
-youtube-dl --write-sub --sub-lang %subtitle_lang% --convert-subs %subtitle_convertformat% --skip-download %url%
+yt-dlp --write-sub --sub-lang %subtitle_lang% --convert-subs %subtitle_convertformat% --skip-download %url%
 pause
 goto :end_subtitles
 
 :subtitle_extractauto-convert
-youtube-dl --write-auto-sub --convert-subs %subtitle_convertformat% --skip-download %url%
+yt-dlp --write-auto-sub --convert-subs %subtitle_convertformat% --skip-download %url%
 pause
 goto :end_subtitles
 
 :subtitle_extract_wvideo
-youtube-dl --recode-video %video_format% --audio-quality %quality% --embed-subs --write-sub --sub-lang %subtitle_lang% --sub-format %subtitle_format% %url%
+yt-dlp --recode-video %video_format% --audio-quality %quality% --embed-subs --write-sub --sub-lang %subtitle_lang% --sub-format %subtitle_format% %url%
 pause
 goto :end_video
 
 :subtitle_extractall_wvideo
-youtube-dl --recode-video %video_format% --audio-quality %quality% --embed-subs --write-sub --all-subs --sub-format %subtitle_format% %url%
+yt-dlp --recode-video %video_format% --audio-quality %quality% --embed-subs --write-sub --all-subs --sub-format %subtitle_format% %url%
 pause
 goto :end_video
 
 :subtitle_extractauto_wvideo
-youtube-dl --recode-video %video_format% --audio-quality %quality% --embed-subs --write-auto-sub --sub-format %subtitle_format% %url%
+yt-dlp --recode-video %video_format% --audio-quality %quality% --embed-subs --write-auto-sub --sub-format %subtitle_format% %url%
 pause
 goto :end_video
 
 :subtitle_extract_wvideokeep
-youtube-dl --keep-video --audio-quality %quality% --embed-subs --write-sub --sub-lang %subtitle_lang% --sub-format %subtitle_format% %url%
+yt-dlp --keep-video --audio-quality %quality% --embed-subs --write-sub --sub-lang %subtitle_lang% --sub-format %subtitle_format% %url%
 pause
 goto :end_video
 
 :subtitle_extractall_wvideokeep
-youtube-dl --keep-video --audio-quality %quality% --embed-subs --write-sub --all-subs --sub-format %subtitle_format% %url%
+yt-dlp --keep-video --audio-quality %quality% --embed-subs --write-sub --all-subs --sub-format %subtitle_format% %url%
 pause
 goto :end_video
 
 :subtitle_extractauto_wvideokeep
-youtube-dl --keep-video --audio-quality %quality% --embed-subs --write-auto-sub --sub-format %subtitle_format% %url%
+yt-dlp --keep-video --audio-quality %quality% --embed-subs --write-auto-sub --sub-format %subtitle_format% %url%
 pause
 goto :end_video
 
 :subtitle_extract_wvideo-convert
-youtube-dl --recode-video %video_format% --audio-quality %quality% --embed-subs --write-sub --sub-lang %subtitle_lang% --convert-subs %subtitle_convertformat% %url%
+yt-dlp --recode-video %video_format% --audio-quality %quality% --embed-subs --write-sub --sub-lang %subtitle_lang% --convert-subs %subtitle_convertformat% %url%
 pause
 goto :end_video
 
 :subtitle_extractall_wvideo-convert
-youtube-dl --recode-video %video_format% --audio-quality %quality% --embed-subs --write-sub --all-subs --convert-subs %subtitle_convertformat% %url%
+yt-dlp --recode-video %video_format% --audio-quality %quality% --embed-subs --write-sub --all-subs --convert-subs %subtitle_convertformat% %url%
 pause
 goto :end_video
 
 :subtitle_extractauto_wvideo-convert
-youtube-dl --recode-video %video_format% --audio-quality %quality% --embed-subs --write-auto-sub --convert-subs %subtitle_convertformat% %url%
+yt-dlp --recode-video %video_format% --audio-quality %quality% --embed-subs --write-auto-sub --convert-subs %subtitle_convertformat% %url%
 pause
 goto :end_video
 
 :subtitle_extract_wvideokeep-convert
-youtube-dl --keep-video --audio-quality %quality% --embed-subs --write-sub --sub-lang %subtitle_lang% --convert-subs %subtitle_convertformat% %url%
+yt-dlp --keep-video --audio-quality %quality% --embed-subs --write-sub --sub-lang %subtitle_lang% --convert-subs %subtitle_convertformat% %url%
 pause
 goto :end_video
 
 :subtitle_extractall_wvideokeep-convert
-youtube-dl --keep-video --audio-quality %quality% --embed-subs --write-sub --all-subs --convert-subs %subtitle_convertformat% %url%
+yt-dlp --keep-video --audio-quality %quality% --embed-subs --write-sub --all-subs --convert-subs %subtitle_convertformat% %url%
 pause
 goto :end_video
 
 :subtitle_extractauto_wvideokeep-convert
-youtube-dl --keep-video --audio-quality %quality% --embed-subs --write-auto-sub --convert-subs %subtitle_convertformat% %url%
+yt-dlp --keep-video --audio-quality %quality% --embed-subs --write-auto-sub --convert-subs %subtitle_convertformat% %url%
 pause
 goto :end_video
 
